@@ -14,41 +14,12 @@ class Solution {
         
         int result = 0;
         
-        for (int i = s.length() - 1; i >= 0; i--) {
-            
-            char symbol = s.charAt(i);
-            
-            if (symbol == 'I') {
-                result += 1;
+        for (int i = 0; i < s.length(); i++) {
+            if (i + 1 < s.length() && symbols.get(s.charAt(i)) < symbols.get(s.charAt(i + 1))) {
+                result -= symbols.get(s.charAt(i));
+            }else {
+                result += symbols.get(s.charAt(i));
             }
-            
-            if (symbol == 'V' || symbol == 'X') {
-                if (i > 0 && s.charAt(i-1) == 'I') {
-                    result += symbols.get(symbol) - 1;
-                    i--;
-                }else {
-                    result += symbols.get(symbol);
-                }
-            }
-            
-            if (symbol == 'L' || symbol == 'C') {
-                if (i > 0 && s.charAt(i-1) == 'X') {
-                    result += symbols.get(symbol) - 10;
-                    i--;
-                } else {
-                     result += symbols.get(symbol);
-                }
-            }
-            
-            if (symbol == 'D' || symbol == 'M') {
-                if (i > 0 && s.charAt(i-1) == 'C') {
-                    result += symbols.get(symbol) - 100;
-                    i--;
-                } else {
-                     result += symbols.get(symbol);
-                }
-            }
-            
         }
         
         return result;
